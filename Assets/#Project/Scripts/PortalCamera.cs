@@ -23,5 +23,19 @@ public class PortalCamera : MonoBehaviour
         Vector3 localPosition = portal1.InverseTransformPoint(transform.position);
         localPosition = Quaternion.AngleAxis(180, Vector3.up) * localPosition;
         portalCamera.transform.position = portal2.TransformPoint(localPosition);
+    
+        Quaternion localRotation = Quaternion.Inverse(portal1.rotation) * transform.rotation;
+        localRotation = Quaternion.Euler(0, 180, 0) * localRotation;
+        portalCamera.transform.rotation = portal2.rotation * localRotation;
+
+        Plane p = new Plane(-portal2.forward, portal2.position);
+        Vector4 planeWorldSpace = new Vector4(p.normal.x, p.normal.y, p.normal.z, p.distance);
+        //portalCamera.cameraToWorldMatrix
+        
+
+
+
+
+
     }
 }
